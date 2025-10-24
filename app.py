@@ -117,7 +117,7 @@ def main():
     # Header Section
     st.markdown("""
     <div class="header-section">
-        <h1>🏁 Latest Flag Logic – Host Deduplication in CrowdStrike Data</h1>
+        <h1>Latest Flag Logic Demo</h1>
         <p style="font-size: 1.2rem; color: #8B949E; margin-top: 1rem;">
             Interactive demo of how timestamp-based flagging removes duplicates and retains the latest host record.
         </p>
@@ -258,12 +258,79 @@ def main():
         progress_bar.progress(1.0)
         status_text.text("✅ Demo complete!")
     
+    # Part 2: Data Loss Demonstration
+    st.markdown("---")
+    st.markdown("## ⚠️ Part 2: Potential Data Loss Issue")
+    
+    st.markdown("### 🚨 The Problem:")
+    st.markdown("When a host has multiple records with different vulnerability findings, the current logic only keeps the latest record. This means **all findings from older records are lost**.")
+    
+    st.markdown("### 📋 Example Scenario:")
+    st.markdown("""
+    - **HR-LAP-001** has 2 records:
+        - **Old record (July 2025):** 200 vulnerability findings
+        - **Latest record (October 2025):** 67 vulnerability findings
+    - **Result:** Only 67 findings are kept, 200 findings are lost!
+    """)
+    
+    # Create mock vulnerability data to demonstrate the issue
+    if st.button("🔍 Show Data Loss Demonstration", type="secondary"):
+        st.session_state.show_data_loss = True
+    
+    if st.session_state.get('show_data_loss', False):
+        st.markdown("### 📊 Mock Vulnerability Findings Data")
+        
+        # Create mock data showing the problem
+        vulnerability_data = {
+            'Hostname': ['HR-LAP-001', 'HR-LAP-001', 'FIN-SRV-01', 'FIN-SRV-01'],
+            'Record_Type': ['Old Record (July 2025)', 'Latest Record (Oct 2025)', 'Old Record (April 2025)', 'Latest Record (Oct 2025)'],
+            'Last_Active': ['18-07-2025 10:22', '24-10-2025 07:55', '10-04-2025 11:45', '24-10-2025 05:10'],
+            'Vulnerability_Findings': [200, 67, 150, 45],
+            'Critical_Issues': [15, 8, 12, 5],
+            'High_Issues': [45, 20, 35, 15],
+            'Medium_Issues': [140, 39, 103, 25]
+        }
+        
+        vuln_df = pd.DataFrame(vulnerability_data)
+        
+        # Display the vulnerability data
+        st.dataframe(vuln_df, use_container_width=True, hide_index=False)
+        
+        st.markdown("### 🎯 Current Logic Impact")
+        
+        # Show what happens with current logic
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**❌ What Gets Lost:**")
+            st.markdown("""
+            - **HR-LAP-001 Old Record:** 200 findings (133 lost!)
+            - **FIN-SRV-01 Old Record:** 150 findings (105 lost!)
+            - **Total Lost:** 238 vulnerability findings
+            """)
+        
+        with col2:
+            st.markdown("**✅ What Gets Kept:**")
+            st.markdown("""
+            - **HR-LAP-001 Latest:** 67 findings
+            - **FIN-SRV-01 Latest:** 45 findings  
+            - **Total Kept:** 112 vulnerability findings
+            """)
+        
+        st.error("""
+        ⚠️ **Critical Issue:** The current deduplication logic assumes that the latest record contains 
+        all relevant information, but in reality, older records may contain unique vulnerability 
+        findings that are not present in the latest record.
+        """)
+        
+    
     # Footer
     st.markdown("---")
     st.markdown("""
     <div style="text-align: center; color: #8B949E; padding: 2rem 0;">
         <p><strong>Latest Flag Logic</strong> — Turning CrowdStrike chaos into clarity.</p>
         <p>By analyzing timestamp recency, we keep only the most accurate host record.</p>
+        <p style="color: #FF6B6B; font-weight: bold;">⚠️ But beware: This approach may cause data loss!</p>
     </div>
     """, unsafe_allow_html=True)
 
