@@ -4,10 +4,10 @@ HR-LAP-001,hr-lap-001.corp.local,X7Y8Z9W0,Windows 10 Pro,SN-LTP-12377,18-07-2025
 FIN-SRV-01,fin-srv-01.corp.local,M4N5O6P7,Windows Server 2022,SN-SRV-45601,24-10-2025 05:10
 FIN-SRV-01,fin-srv-01.corp.local,B2V3C4X5,Windows Server 2019,SN-SRV-45700,10-04-2025 11:45
 ENG-LAP-002,eng-lap-002.apac.corp.local,E5R6T7Y8,Windows 11 Pro,SN-LTP-12377,24-10-2025 06:30
-ENG-LAP-002,eng-lap-002.apac.corp.local,J1K2L3M4,—,—,01-08-2025 09:00
+ENG-LAP-002,eng-lap-002.apac.corp.local,J1K2L3M4,,,01-08-2025 09:00
 DC-01,dc-01.corp.local,Q1W2E3R4,Windows Server 2022,SN-SRV-80221,24-10-2025 06:12
 DC-01,dc01.corp.local,Z9X8C7V6,Windows Server 2016,SN-SRV-80116,09-11-2024 08:55
 MAC-MKT-01,mac-mkt-01.corp.local,U9I8O7P6,macOS 14.3,SN-MAC-44100,23-10-2025 18:00
 MAC-MKT-01,mac-mkt-01.local,W3E2R1T4,macOS 13.5,SN-MAC-44100,17-05-2025 09:10
 LIN-WEB-01,lin-web-01.prod.corp.local,D3F4G5H6,Ubuntu 22.04,SN-LNX-22004,24-10-2025 10:15
-LIN-TEST-01,lin-test-01.dev.corp.local,S1D2F3G4,Ubuntu 20.04,—,10-12-2024 11:00
+LIN-TEST-01,lin-test-01.dev.corp.local,S1D2F3G4,Ubuntu 20.04,,10-12-2024 11:00
