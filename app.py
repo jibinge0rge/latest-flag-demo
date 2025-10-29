@@ -285,7 +285,7 @@ def main():
             'Hostname': ['HR-LAP-001', 'HR-LAP-001', 'FIN-SRV-01', 'FIN-SRV-01'],
             'Record_Type': ['Old Record (July 2025)', 'Latest Record (Oct 2025)', 'Old Record (April 2025)', 'Latest Record (Oct 2025)'],
             'Last_Active': ['18-07-2025 10:22', '24-10-2025 07:55', '10-04-2025 11:45', '24-10-2025 05:10'],
-            'Vulnerability_Findings': [200, 67, 150, 45],
+            'Count of Vulnerability Findings': [200, 67, 150, 45],
             'Critical_Issues': [15, 8, 12, 5],
             'High_Issues': [45, 20, 35, 15],
             'Medium_Issues': [140, 39, 103, 25]
