@@ -57,8 +57,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def highlight_duplicates(val):
-    """Highlight duplicate hostnames"""
+    """Highlight duplicate hostnames and serial numbers"""
     if val in st.session_state.get('duplicate_hostnames', []):
+        return 'background-color: #FF6B6B; color: white'
+    if val in st.session_state.get('duplicate_serial_numbers', []):
         return 'background-color: #FF6B6B; color: white'
     return ''
 
@@ -95,6 +97,14 @@ def load_data():
         hostname_counts = df['Hostname'].value_counts()
         duplicate_hostnames = hostname_counts[hostname_counts > 1].index.tolist()
         st.session_state['duplicate_hostnames'] = duplicate_hostnames
+        
+        # Find duplicate serial numbers for highlighting (excluding empty/null values)
+        if 'Serial Number' in df.columns:
+            serial_counts = df['Serial Number'].value_counts()
+            duplicate_serial_numbers = serial_counts[serial_counts > 1].index.tolist()
+            # Filter out empty strings and NaN values
+            duplicate_serial_numbers = [sn for sn in duplicate_serial_numbers if pd.notna(sn) and str(sn).strip() != '']
+            st.session_state['duplicate_serial_numbers'] = duplicate_serial_numbers
         
         return df
     except Exception as e:
@@ -148,15 +158,24 @@ def main():
         st.markdown("**Raw host data showing duplicate entries:**")
         
         # Display raw data with duplicate highlighting
+        highlight_columns = ['Hostname']
+        if 'Serial Number' in df.columns:
+            highlight_columns.append('Serial Number')
+        
         st.dataframe(
-            df.style.applymap(highlight_duplicates, subset=['Hostname']),
+            df.style.applymap(highlight_duplicates, subset=highlight_columns),
             use_container_width=True,
             hide_index=False
         )
         
         # Show duplicate summary
-        duplicate_count = len(st.session_state.get('duplicate_hostnames', []))
-        st.info(f"🔍 Found {duplicate_count} hostnames with duplicates")
+        duplicate_hostname_count = len(st.session_state.get('duplicate_hostnames', []))
+        duplicate_serial_count = len(st.session_state.get('duplicate_serial_numbers', []))
+        summary_text = f"🔍 Found {duplicate_hostname_count} hostnames"
+        if duplicate_serial_count > 0:
+            summary_text += f" and {duplicate_serial_count} serial numbers"
+        summary_text += " with duplicates"
+        st.info(summary_text)
     
     # Step 2: Explain Logic
     st.markdown("## 🧠 Step 2: Latest Flag Logic Explanation")
