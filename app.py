@@ -286,7 +286,7 @@ def main():
             'Record Type': ['Old Record (July 2025)', 'Latest Record (Oct 2025)', 'Old Record (April 2025)', 'Latest Record (Oct 2025)'],
             'Last Active': ['18-07-2025 10:22', '24-10-2025 07:55', '10-04-2025 11:45', '24-10-2025 05:10'],
             'Count of Vulnerability Findings': [200, 67, 150, 45],
-            'Critical_Issues': [15, 8, 12, 5],
+            'Critical Issues': [15, 8, 12, 5],
             'High Issues': [45, 20, 35, 15],
             'Medium Issues': [140, 39, 103, 25]
         }
