@@ -283,12 +283,12 @@ def main():
         # Create mock data showing the problem
         vulnerability_data = {
             'Hostname': ['HR-LAP-001', 'HR-LAP-001', 'FIN-SRV-01', 'FIN-SRV-01'],
-            'Record_Type': ['Old Record (July 2025)', 'Latest Record (Oct 2025)', 'Old Record (April 2025)', 'Latest Record (Oct 2025)'],
-            'Last_Active': ['18-07-2025 10:22', '24-10-2025 07:55', '10-04-2025 11:45', '24-10-2025 05:10'],
+            'Record Type': ['Old Record (July 2025)', 'Latest Record (Oct 2025)', 'Old Record (April 2025)', 'Latest Record (Oct 2025)'],
+            'Last Active': ['18-07-2025 10:22', '24-10-2025 07:55', '10-04-2025 11:45', '24-10-2025 05:10'],
             'Count of Vulnerability Findings': [200, 67, 150, 45],
             'Critical_Issues': [15, 8, 12, 5],
-            'High_Issues': [45, 20, 35, 15],
-            'Medium_Issues': [140, 39, 103, 25]
+            'High Issues': [45, 20, 35, 15],
+            'Medium Issues': [140, 39, 103, 25]
         }
         
         vuln_df = pd.DataFrame(vulnerability_data)
